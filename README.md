@@ -10,14 +10,20 @@ This library is directly inspired by https://github.com/namiwang/actioncable_dar
 
 ## Import
 
-```dart
-import 'package:action_cable_stream/action_cable_stream.dart';
-import 'package:action_cable_stream/action_cable_stream_states.dart';
+```yaml
+dependencies:
+  action_cable_stream: ^0.0.2
 ```
 
 ## Usage
 
 ```dart
+  import 'dart:convert';
+  import 'package:flutter/material.dart';
+
+  import 'package:action_cable_stream/action_cable_stream.dart';
+  import 'package:action_cable_stream/action_cable_stream_states.dart';
+
   class _MyHomePageState extends State<MyHomePage> {
     final String _channel = 'MyChannel';
     final String _action_cable_url = 'wss://example.com/cable';
