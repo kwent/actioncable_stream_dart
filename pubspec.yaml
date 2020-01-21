@@ -8,5 +8,5 @@ environment:
   sdk: '>=2.0.0 <3.0.0'
 
 dependencies:
-  rxdart: ^0.20.0
+  rxdart: '>=0.20.0'
   web_socket_channel: ^1.1.0
