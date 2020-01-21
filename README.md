@@ -12,7 +12,7 @@ This library is directly inspired by https://github.com/namiwang/actioncable_dar
 
 ```yaml
 dependencies:
-  action_cable_stream: ^0.0.2
+  action_cable_stream: ^0.0.3
 ```
 
 ## Usage
