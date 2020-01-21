@@ -12,7 +12,7 @@ class ActionCable {
 
   ActionCable.Stream(
     String url, {
-    Map<String, String> headers: const {},
+    Map<String, String> headers = const {},
   }) {
     _socketChannel = IOWebSocketChannel.connect(url, headers: headers);
     stream = PublishSubject<ActionCableDataState>();
@@ -94,7 +94,6 @@ class ActionCable {
   }
 
   void _handleDataMsg(Map payload) {
-    final channelId = parseChannelId(payload['identifier']);
     stream.sink.add(ActionCableMessage(payload['message']));
   }
 
