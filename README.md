@@ -18,13 +18,6 @@ import 'package:action_cable_stream/action_cable_stream_states.dart';
 ## Usage
 
 ```dart
-  class MyHomePage extends StatefulWidget {
-    MyHomePage({Key key}) : super(key: key);
-
-    @override
-    _MyHomePageState createState() => new _MyHomePageState();
-  }
-
   class _MyHomePageState extends State<MyHomePage> {
     final String _channel = 'MyChannel';
     final String _action_cable_url = 'wss://example.com/cable';
@@ -40,7 +33,8 @@ import 'package:action_cable_stream/action_cable_stream_states.dart';
           _cable.subscribeToChannel(_channel, channelParams: {'id': 10});
         } else if (value is ActionCableSubscriptionConfirmed) {
           print('ActionCableSubscriptionConfirmed');
-          _cable.performAction(_channel, 'send_message', channelParams: {'id': 10}, actionParams: {'body': 'hello world'});
+          _cable.performAction(_channel, 'send_message',
+              channelParams: {'id': 10}, actionParams: {'body': 'hello world'});
         } else if (value is ActionCableMessage) {
           print('ActionCableMessage ${jsonEncode(value.message)}');
         }
@@ -71,7 +65,9 @@ import 'package:action_cable_stream/action_cable_stream_states.dart';
   Widget buildBody(AsyncSnapshot<ActionCableDataState> snapshot) {
     final state = snapshot.data;
 
-    if (state is ActionCableInitial || state is ActionCableConnectionLoading || state is ActionCableSubscribeLoading) {
+    if (state is ActionCableInitial ||
+        state is ActionCableConnectionLoading ||
+        state is ActionCableSubscribeLoading) {
       return Text('Loading...');
     } else if (state is ActionCableError) {
       return Text('Error... ${state.message}');

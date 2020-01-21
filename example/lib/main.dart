@@ -39,8 +39,8 @@ class _MyHomePageState extends State<MyHomePage> {
         _cable.subscribeToChannel(_channel, channelParams: {'id': 10});
       } else if (value is ActionCableSubscriptionConfirmed) {
         print('ActionCableSubscriptionConfirmed');
-        _cable
-            .performAction(_channel, 'send_message', channelParams: {'id': 10}, actionParams: {'body': 'hello world'});
+        _cable.performAction(_channel, 'send_message',
+            channelParams: {'id': 10}, actionParams: {'body': 'hello world'});
       } else if (value is ActionCableMessage) {
         print('ActionCableMessage ${jsonEncode(value.message)}');
       }
@@ -71,7 +71,9 @@ class _MyHomePageState extends State<MyHomePage> {
 Widget buildBody(AsyncSnapshot<ActionCableDataState> snapshot) {
   final state = snapshot.data;
 
-  if (state is ActionCableInitial || state is ActionCableConnectionLoading || state is ActionCableSubscribeLoading) {
+  if (state is ActionCableInitial ||
+      state is ActionCableConnectionLoading ||
+      state is ActionCableSubscribeLoading) {
     return Text('Loading...');
   } else if (state is ActionCableError) {
     return Text('Error... ${state.message}');

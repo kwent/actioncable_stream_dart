@@ -18,7 +18,8 @@ class ActionCable {
     stream = PublishSubject<ActionCableDataState>();
     stream.sink.add(ActionCableConnectionLoading());
     _listener = _socketChannel.stream.listen(_onData, onError: (Object err) {
-      stream.sink.add(ActionCableError('Something went wrong while trying to connect.'));
+      stream.sink.add(
+          ActionCableError('Something went wrong while trying to connect.'));
     });
   }
 
@@ -39,16 +40,22 @@ class ActionCable {
   void unsubscribeToChannel(String channelName, {Map channelParams}) {
     stream.sink.add(ActionCableUnsubscribeLoading());
     final channelId = encodeChannelId(channelName, channelParams);
-    _socketChannel.sink.add(jsonEncode({'identifier': channelId, 'command': 'unsubscribe'}));
+    _socketChannel.sink
+        .add(jsonEncode({'identifier': channelId, 'command': 'unsubscribe'}));
   }
 
-  void performAction(String channelName, String actionName, {Map channelParams, Map actionParams}) {
+  void performAction(String channelName, String actionName,
+      {Map channelParams, Map actionParams}) {
     final channelId = encodeChannelId(channelName, channelParams);
 
     actionParams ??= {};
     actionParams['action'] = actionName;
 
-    _send({'identifier': channelId, 'command': 'message', 'data': jsonEncode(actionParams)});
+    _send({
+      'identifier': channelId,
+      'command': 'message',
+      'data': jsonEncode(actionParams)
+    });
   }
 
   void _onData(dynamic payload) {
@@ -81,7 +88,8 @@ class ActionCable {
         stream.sink.add(ActionCableSubscriptionRejected(channelId));
         break;
       default:
-        stream.sink.add(ActionCableError("Invalid Protocol Message: ${payload['type']}"));
+        stream.sink.add(
+            ActionCableError("Invalid Protocol Message: ${payload['type']}"));
     }
   }
 
