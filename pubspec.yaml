@@ -1,5 +1,5 @@
 name: action_cable_stream
-version: 0.0.1
+version: 0.0.2
 description: >-
   ActionCable client port in dart using streams, available in web, dartVM and flutter.
 homepage: https://github.com/kwent/actioncable_stream_dart
